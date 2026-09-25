@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Yükləmə Mərkəzi</title>
+    <style>
+        /* Ümumi dizayn və donmasız (lag-free) performans üçün optimizasiya */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            /* Möhtəşəm və yüngül qradiyent arxa fon */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 420px;
+        }
+        .card {
+            background: rgba(30, 30, 46, 0.85);
+            /* Şüşə effekti (Glassmorphism) - zərif və gözəl görünüş */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+        .card:active {
+            transform: scale(0.99); /* Toxunduqda yüngül reaksiya */
+        }
+        h2 {
+            color: #00ff87;
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h3 {
+            color: #ff2a6d;
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        p {
+            color: #a0a0c0;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        .input-box {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(15, 15, 25, 0.6);
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-box:focus {
+            border-color: #00ff87;
+        }
+        .btn-mp3 {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.3);
+        }
+        .btn-tiktok {
+            background: linear-gradient(135deg, #f72585, #7209b7);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+        }
+        /* Mobil cihazlarda düymələrə toxunma hissiyyatını artırmaq üçün */
+        button:active {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- 1. MP3 Bölməsi -->
+        <div class="card">
+            <h2>🎵 MP3 Axtarış</h2>
+            <p>Mahnı və ya ifaçı adını daxil edin:</p>
+            <input type="text" id="songInput" class="input-box" placeholder="Məsələn: Sezen Aksu">
+            <button class="btn-mp3" onclick="searchSong()">Mahnı Axtar</button>
+        </div>
+
+        <!-- 2. TikTok Bölməsi -->
+        <div class="card">
+            <h3>📥 TikTok Video</h3>
+            <p>TikTok video linkini bura yapışdırın:</p>
+            <input type="text" id="tiktokInput" class="input-box" placeholder="https://vm.tiktok.com/...">
+            <button class="btn-tiktok" onclick="downloadTikTok()">Videonu Yüklə</button>
+        </div>
+    </div>
+
+    <script>
+        // Sürətli və lag-siz işləyən funksiyalar
+        function searchSong() {
+            const query = document.getElementById('songInput').value.trim();
+            if (query === "") {
+                alert("Zəhmət olmasa mahnı adı daxil edin!");
+                return;
+            }
+            window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query + " mp3 indir yukle");
+        }
+
+        function downloadTikTok() {
+            const tiktokLink = document.getElementById('tiktokInput').value.trim();
+            if (tiktokLink === "" || !tiktokLink.includes("tiktok.com")) {
+                alert("Zəhmət olmasa düzgün TikTok linki daxil edin!");
+                return;
+            }
+            window.location.href = "https://ssstik.io/az?url=" + encodeURIComponent(tiktokLink);
+        }
+    </script>
+
+</body>
+</html>
